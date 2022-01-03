@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jules/Documents/synthese/TD2/glimac/src/Cube.cpp
+cmath
+-
+vector
+-
+iostream
+-
+glimac/common.hpp
+/home/jules/Documents/synthese/TD2/glimac/src/glimac/common.hpp
+glimac/Cube.hpp
+/home/jules/Documents/synthese/TD2/glimac/src/glimac/Cube.hpp
+
+glimac/include/glimac/Cube.hpp
+vector
+-
+common.hpp
+glimac/include/glimac/common.hpp
+
+glimac/include/glimac/common.hpp
+GL/glew.h
+-
+glm.hpp
+glimac/include/glimac/glm.hpp
+
+glimac/include/glimac/glm.hpp
+glm/glm.hpp
+-
+glm/gtc/matrix_transform.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+glm/gtc/constants.hpp
+-
+glm/gtx/io.hpp
+-
+glm/gtc/random.hpp
+-
+
