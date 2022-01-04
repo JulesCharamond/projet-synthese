@@ -23,3 +23,6 @@ les boutons du pavé numérique 0,1 et 2 permettent de toggle les différentes l
 si vous n'avez pas de pavé numérique, r,f et c le font aussi
 
 escape permet de quitter le programme
+
+Un probleme a été découvert lors de la compilation sur les machines de l'universitées le fichier glm.hpp nécéssite la ligne : #define GLM_ENABLE_EXPERIMENTAL
+Un second problème sur les machines de l'université est le non afichage de la seconde spotlight (censé suivre le piston ainsi que l'impossibilité d'éteindre la lumière caméra, aucune solution n'est connue
