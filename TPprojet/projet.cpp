@@ -163,7 +163,8 @@ int main(int argc, char** argv) {
     
 
     /* Spot Lights */
-    bool flagSpot[NB_SPOTS];
+    bool flagSpot0;
+    bool flagSpot1;
 
     glm::vec4 spotLightsPositions[NB_SPOTS-1];
     glm::vec3 spotLightsIntensities[NB_SPOTS-1];
@@ -171,7 +172,6 @@ int main(int argc, char** argv) {
     float spotLightsAngles[NB_SPOTS-1];
 
     for (int i = 1; i < NB_SPOTS; i++) {
-        flagSpot[i] = false;
         spotLightsIntensities[i-1] = glm::vec3(0.,0.,0.);
     }
 
@@ -188,8 +188,8 @@ int main(int argc, char** argv) {
 
 
     /* Camera Light */
-    flagSpot[0] = true;
-    flagSpot[1] = true;
+    flagSpot0 = true;
+    flagSpot1 = true;
 
 
     /* First PointLight */
@@ -438,21 +438,24 @@ int main(int argc, char** argv) {
                         break;
                     case SDLK_r:
                         flagPoint = !flagPoint;
+                        //std::cout<< flagPoint<<std::endl;
                         break;
                     case SDLK_f:
-                        flagSpot[0] = !flagSpot[0];
+                        flagSpot0 = !flagSpot0;
+                        //std::cout<< "flagspot0:" << flagSpot0<<std::endl;
                         break;
                     case SDLK_c:
-                        flagSpot[1] = !flagSpot[1];
+                        flagSpot1 = !flagSpot1;
+                        //std::cout<< "flagspot1:" << flagSpot1<<std::endl;
                         break;
                     case SDLK_KP0:
                         flagPoint = !flagPoint;
                         break;
                     case SDLK_KP1:
-                        flagSpot[0] = !flagSpot[0];
+                        flagSpot0 = !flagSpot0;
                         break;
                     case SDLK_KP2:
-                        flagSpot[1] = !flagSpot[1];
+                        flagSpot1 = !flagSpot1;
                         break;
                     case SDLK_p:
                         tmp = speed;
@@ -504,7 +507,7 @@ int main(int argc, char** argv) {
         
 
         /* Camera light */
-        if (flagSpot[0]) {
+        if (flagSpot0) {
             glUniform3f(bielleProgram.uSpotLightsPos[0], 0., 0., 0.);
             glUniform3f(bielleProgram.uSpotLightsIntensities[0], 15., 15., 15.);
             glUniform3f(bielleProgram.uSpotLightsDirections[0], 0., 0., -1);
@@ -513,11 +516,13 @@ int main(int argc, char** argv) {
             glUniform3f(bielleProgram.uSpotLightsIntensities[0],0.,0.,0.);
         }
         /* Spots lights */
-        if (flagSpot[1]) {
-            glUniform3fv(bielleProgram.uSpotLightsPos[1], 1, glm::value_ptr(glm::vec3(cam.getViewMatrix()*spotLightsPositions[1])));
+        if (flagSpot1) {
+            glUniform3fv(bielleProgram.uSpotLightsPos[1], 1, glm::value_ptr(glm::vec3(cam.getViewMatrix()*glm::vec4(pos_piston,l,0,1))));
             glUniform3fv(bielleProgram.uSpotLightsIntensities[1], 1, glm::value_ptr(spotLightsIntensities[1]));
             glUniform3fv(bielleProgram.uSpotLightsDirections[1], 1, glm::value_ptr(glm::vec3(cam.getViewMatrix()*spotLightsDirections[1])));
             glUniform1f(bielleProgram.uSpotLightsAngles[1], glm::cos(spotLightsAngles[1]));
+            //std::cout<< "position: " << spotLightsPositions[1]<<std::endl;
+            //std::cout<< "direction :" << spotLightsDirections[1]<<std::endl;
         } else {
             glUniform3f(bielleProgram.uSpotLightsIntensities[1],0.,0.,0.);
         }
@@ -732,7 +737,7 @@ int main(int argc, char** argv) {
         
 
         /* Camera light */
-        if (flagSpot[0]) {
+        if (flagSpot0) {
             glUniform3fv(warehouse.uSpotLightsPos[0], 1, glm::value_ptr(cam.getViewMatrix()));
             glUniform3fv(warehouse.uSpotLightsIntensities[0], 1, glm::value_ptr(glm::vec3(1,1,1)));
             glUniform3fv(warehouse.uSpotLightsDirections[0], 1, glm::value_ptr(glm::vec3(0,0,-1)));
@@ -741,8 +746,8 @@ int main(int argc, char** argv) {
             glUniform3f(warehouse.uSpotLightsIntensities[0],0.,0.,0.);
         }
         /* Spots lights */
-        if (flagSpot[1]) {
-            glUniform3fv(warehouse.uSpotLightsPos[1], 1, glm::value_ptr(glm::vec3(cam.getViewMatrix()*spotLightsPositions[1])));
+        if (flagSpot1) {
+            glUniform3fv(warehouse.uSpotLightsPos[1], 1, glm::value_ptr(glm::vec3(cam.getViewMatrix()*glm::vec4(pos_piston,l,0,1))));
             glUniform3fv(warehouse.uSpotLightsIntensities[1], 1, glm::value_ptr(spotLightsIntensities[1]));
             glUniform3fv(warehouse.uSpotLightsDirections[1], 1, glm::value_ptr(glm::vec3(cam.getViewMatrix()*spotLightsDirections[1])));
             glUniform1f(warehouse.uSpotLightsAngles[1], glm::cos(spotLightsAngles[1]));
