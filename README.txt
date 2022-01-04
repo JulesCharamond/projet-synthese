@@ -26,3 +26,4 @@ escape permet de quitter le programme
 
 Un probleme a été découvert lors de la compilation sur les machines de l'université le fichier glm.hpp nécéssite la ligne : #define GLM_ENABLE_EXPERIMENTAL
 Un second problème sur les machines de l'université est le non afichage de la seconde spotlight (censée suivre le piston) ainsi que l'impossibilité d'éteindre la lumière caméra, aucune solution n'est connue
+Le problème précédent venaient d'une mauvaise gestion par les machines de l'université des tableaux de booléens
